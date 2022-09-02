@@ -1,13 +1,21 @@
-<script>
+<script lang="ts">
 	// Imports
 	import { onMount } from "svelte";
 
 	// Exports
-	export let entry;
-	export let i;
+	export let entry: {
+		id: number;
+		timestamp: Date;
+		author: string;
+		avatar: string;
+		location: { country: string, city: string }[];
+		language: number;
+		text: string;
+		rating: number;
+	};
 
 	// Lets
-	let daysAgo;
+	let daysAgo: string;
 
 	// Days Counter
 	const daysAgoCounter = () => {
@@ -42,19 +50,20 @@
 
 <!-- HTML -->
 {#if entry}
-	<article id={entry.userId}>
-		<div>
-			<figure>
-				<img src="https://joeschmoe.io/api/v1/{entry.avatar}" alt="{entry.author}" loading="lazy" width="60" height="60"/>
-				<figcaption>
-					<dl>
-						<dt>{entry.author}</dt>
-						<dd><time datetime={entry.timestamp}>{daysAgo} days ago</time></dd>
-					</dl>
-				</figcaption>
-			</figure>
-			<p>{entry.text} — {++i}</p>
-		</div>
-		<button>Pray</button>
+	<article id="{entry.id}">
+		<figure>
+			<img src="https://joeschmoe.io/api/v1/{entry.avatar}" alt="avatar-{entry.avatar}" loading="lazy" width="60" height="60"/>
+			<figcaption>
+				<dl>
+					<dt>{@html entry.author}</dt>
+					<dd><time datetime="{entry.timestamp}">{daysAgo} days ago</time></dd>
+				</dl>
+			</figcaption>
+		</figure>
+		<p>{entry.text}</p>
+		<button type="button">
+			<svg width="30" height="30" stroke-width="1.8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M14 14H2M10 10H2M6 6H2M18 18H2M19 14V4m0 0l3 3m-3-3l-3 3" stroke="#000000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+			{entry.rating}
+		</button>
 	</article>
 {/if}

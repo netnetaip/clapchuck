@@ -9,9 +9,6 @@
 	--color-blue: #0022E0;
 	--point: 2px;
 }
-::-webkit-scrollbar {
-	display: none;
-}
 
 /* Fonts */
 @font-face {
@@ -38,7 +35,6 @@ html, body {
 }
 
 main {
-	height: 100vh;
 	overflow: hidden;
 }
 
@@ -48,7 +44,7 @@ main, header {
 }
 
 /* Font Settings */
-h1, h2, h3, h4, a, button, p, small, label, dt, dd, th, td, li {
+h1, h2, h3, h4, a, button, p, small, label, dt, dd {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -58,17 +54,18 @@ h1, h2, h3, h4, a, button, p, small, label, dt, dd, th, td, li {
 	text-decoration: none;
 }
 
-h1, h2, h4, a, label, dt, th, button {
+h1, h2, h4, a, label, dt, button {
 	color: var(--color-black);
 	font-family: "wals-med", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
 }
 
-h3, dd, td, small, ol > li {
+h3, dd {
 	color: var(--color-dark);
 	font-family: "wals-reg", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
 }
 
-h3, p, dd, td, small, ol > li {
+p, li, small {
+	color: var(--color-black);
 	font-family: "wals-reg", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
 }
 
@@ -85,46 +82,40 @@ button, dt, dd, label {
 	font-size: clamp(0.875rem, 0.825rem + 0.2vw, 1rem);
 }
 
-small, li {
+small {
 	font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
 }
 
 /* Flexbox */
-body, header, menu, nav, a, ul, ol, li, main, div, article, section, progress, form, label, dl, input, details, button, figure {
+body, header, menu, nav, a, main, div, article, section, progress, form, label, input, details, button, figure {
 	display: flex;
 }
 
 /* Direction */
-body, main, div, dl, section {
+body, main, section, article {
 	flex-direction: column;
 }
 
-/* Align Start */
-section {
-	align-items: flex-start;
-	align-content: flex-start;
-}
-
 /* Align Stretch */
-article {
+article, section {
 	align-items: stretch;
 	align-content: stretch;
 }
 
 /* Align Center */
-body, menu, header, a, button, figure {
+body, menu, header, a, figure, button, div {
 	align-items: center;
 	align-content: center;
 }
 
 /* Justify Stretch */
-body, article, button {
+body {
 	justify-items: stretch;
 	justify-content: stretch;
 }
 
 /* Justify Between */
-header, form {
+header, form, article {
 	justify-items: space-between;
 	justify-content: space-between;
 }
@@ -137,6 +128,7 @@ progress {
 	-webkit-appearance: none;
 	appearance: none;
 	height: calc(2 * var(--point));
+	z-index: 200;
 }
 ::-webkit-progress-bar {
 	background-color: transparent;
@@ -157,10 +149,18 @@ body > header {
 	z-index: 100;
 }
 
-header a {
-	min-height: calc(32 * var(--point));
-	max-height: calc(32 * var(--point));
+header > nav {
+	gap: calc(10 * var(--point));
+	min-height: calc(30 * var(--point));
+	max-height: calc(30 * var(--point));
 	height: 100%;
+}
+
+.selected > svg {
+}
+
+header > nav > a {
+	border-bottom: var(--point) solid transparent;
 }
 
 /* Backdrop Filter */
@@ -279,57 +279,55 @@ main > section > article {
 	min-width: 100%;
 	max-width: 100%;
 	width: 100%;
-	gap: calc(4 * var(--point));
-	align-self: stretch;
+	gap: calc(6 * var(--point));
 	border-bottom: 1px solid var(--color-grey);
 }
 
-main > section > article > div {
-	gap: calc(4 * var(--point));
+article > figure {
+	gap: calc(6 * var(--point));
+	min-width: 100%;
 	max-width: 100%;
 	width: 100%;
 }
 
-article > div > figure {
-	gap: calc(6 * var(--point));
+figure, p {
+	min-width: 100% !important;
+	max-width: 100% !important;
+	width: 100% !important;
 }
 
-article > div > figure > img {
-	min-width: calc(16 * var(--point));
-	max-width: calc(16 * var(--point));
+article > figure > img {
+	min-width: calc(20 * var(--point));
+	max-width: calc(20 * var(--point));
 	width: 100%;
-	min-height: calc(16 * var(--point));
-	max-height: calc(16 * var(--point));
+	min-height: calc(20 * var(--point));
+	max-height: calc(20 * var(--point));
 	height: 100%;
 	border-radius: var(--rad50);
 	background-color: var(--color-grey);
 }
 
-dl {
+article > figure > figcaption > dl {
 	max-width: 100%;
 	width: 100%;
 }
 
-dl > dd {
+article > figure > figcaption > dl > dd {
 	display: -webkit-box;
 	-webkit-line-clamp: 6;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 }
 
-article > button {
-	min-width: calc(14 * var(--point));
-	max-width: calc(14 * var(--point));
-	width: 100%;
-	min-height: calc(14 * var(--point));
-	max-height: calc(14 * var(--point));
-	height: 100%;
-	padding: calc(2 * var(--point));
-}
-
 article > button > svg {
+	min-width: calc(11 * var(--point));
+	max-width: calc(11 * var(--point));
 	width: 100%;
+	min-height: calc(11 * var(--point));
+	max-height: calc(11 * var(--point));
 	height: 100%;
+	margin-right: calc(4 * var(--point));
+	/* background-color: aqua; */
 }
 
 /* Media Rules */

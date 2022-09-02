@@ -1,15 +1,15 @@
 <script lang="ts">	
 	// Imports
 	import Article from "$lib/article/Article.svelte";
+	import type { PageData } from '../../../.svelte-kit/types/src/routes/board/$types';
+
+	// Exports
+	export let data: PageData;
 
 	// Lets
 	let dataMoreEntries = [];
 	let page = 1;
 	let limit = 40;
-
-	// Fetch Data
-	/** @type {import('./$types').PageData} */
-	export let data: entries
 
 	// Fetch More Data
 	const fetchMore = async () => {
@@ -34,11 +34,11 @@
 </svelte:head>
 
 <!-- DEVELOPMENT -->
-<div style="background-color: pink; position: fixed; bottom: 50px; z-index: 999; padding: 10px;">
+<!-- <div style="background-color: pink; position: fixed; bottom: 20px; z-index: 999; padding: 10px;">
 	<p>Entries int - {data.entries.length}</p>
 	<p>Entries add - {dataMoreEntries.length}</p>
-	<p>Entries addition all loaded? - {data.entries.length ? 'no' : 'yes'}</p>
-</div>
+	<p>Entries addition all loaded? - {dataMoreEntries.length === 0 || dataMoreEntries.length >= 40 ? 'no' : 'yes'}</p>
+</div> -->
 
 <!-- Cards -->
 <section>
@@ -46,9 +46,11 @@
 	{#if data.entries.length === 0}
 		<pre>Nothing here yet</pre>
 	{:else}
-		{#each data.entries as entry, i}
-			<Article {entry} {i} />
+		{#each data.entries as entry}
+			<Article {entry} />
 		{/each}
 	{/if}
-	<button on:click={() => {page++; fetchMore()}}>Load more...</button>
+	{#if dataMoreEntries.length === 0 || dataMoreEntries.length >= 40}
+		<button on:click={() => {page++; fetchMore()}}>Load more...</button>
+	{/if}
 </section>
