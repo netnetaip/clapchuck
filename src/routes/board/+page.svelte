@@ -7,7 +7,7 @@
 	export let data: PageData;
 
 	// Lets
-	let dataMoreEntries = [];
+	let dataMoreEntries: any = [];
 	let page = 1;
 	let limit = 40;
 

@@ -4,8 +4,8 @@
 
 	// Exports
 	export let entry: {
-		id: number;
-		timestamp: Date;
+		id: string;
+		timestamp: string;
 		author: string;
 		avatar: string;
 		location: { country: string, city: string }[];
@@ -15,15 +15,15 @@
 	};
 
 	// Lets
-	let daysAgo: string;
+	let daysAgo: number;
 
 	// Days Counter
 	const daysAgoCounter = () => {
-		let firstDate = new Date();
-		let secondDate = new Date(entry.timestamp);
+		const firstDate: Date = new Date();
+		const secondDate: Date = new Date(entry.timestamp);
 		const daysSingle = 24 * 60 * 60 * 1000;
 		const daysDiff = Math.round(
-			Math.abs((firstDate - secondDate) / daysSingle)
+			Math.abs((firstDate.getTime() - secondDate.getTime()) / daysSingle)
 		);
 		return (daysAgo = daysDiff);
 	};

@@ -169,7 +169,7 @@ nav {
 	width: 100%;
 	gap: calc(12 * var(--point));
 	padding: calc(14 * var(--point));
-	background-color: palevioletred;
+	background-color: powderblue;
 	border-radius: calc(2 * var(--rad50)) calc(2 * var(--rad50)) 0 0; 
 }
 
