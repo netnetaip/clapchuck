@@ -92,7 +92,7 @@ body, header, menu, nav, a, main, div, article, section, progress, form, label, 
 }
 
 /* Direction */
-body, main, section, article {
+body, main, section, article, nav {
 	flex-direction: column;
 }
 
@@ -112,6 +112,12 @@ body, menu, header, a, figure, button, div {
 body {
 	justify-items: stretch;
 	justify-content: stretch;
+}
+
+/* Justify Center */
+nav {
+	justify-items: center;
+	justify-content: center;
 }
 
 /* Justify Between */
@@ -138,10 +144,16 @@ progress {
 	transition: all .2s ease-in;
 }
 
-/* Menu */
-body > header {
-	max-width: 100%;
-	width: 100%;
+/* SVGs */
+svg {
+	stroke-width: 1.8;
+}
+
+/* Header */
+header {
+	min-height: calc(30 * var(--point));
+	max-height: calc(30 * var(--point));
+	height: 100%;
 	padding: 0 calc(14 * var(--point));
 	background-color: white;
 	position: sticky;
@@ -149,17 +161,19 @@ body > header {
 	z-index: 100;
 }
 
-header > nav {
-	gap: calc(10 * var(--point));
-	min-height: calc(30 * var(--point));
-	max-height: calc(30 * var(--point));
-	height: 100%;
+nav {
+	position: fixed;
+	bottom: 0;
+	min-width: 100%;
+	max-width: 100%;
+	width: 100%;
+	gap: calc(12 * var(--point));
+	padding: calc(14 * var(--point));
+	background-color: palevioletred;
+	border-radius: calc(2 * var(--rad50)) calc(2 * var(--rad50)) 0 0; 
 }
 
-.selected > svg {
-}
-
-header > nav > a {
+nav > a {
 	border-bottom: var(--point) solid transparent;
 }
 
@@ -288,12 +302,6 @@ article > figure {
 	min-width: 100%;
 	max-width: 100%;
 	width: 100%;
-}
-
-figure, p {
-	min-width: 100% !important;
-	max-width: 100% !important;
-	width: 100% !important;
 }
 
 article > figure > img {
