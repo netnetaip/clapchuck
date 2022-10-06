@@ -3,66 +3,60 @@
 	import { onMount } from "svelte";
 
 	// Exports
+	export let user: string;
 	export let entry: {
 		id: string;
 		timestamp: string;
-		author: string;
-		avatar: string;
-		location: { country: string, city: string }[];
-		language: number;
+		language: string;
+		title: string;
 		text: string;
 		rating: number;
 	};
 
 	// Lets
 	let daysAgo: number;
+	let daysHolder: string = "Days ago";
+	
+	// // Days Counter
+	// const daysAgoCounter = () => {
+	// 	const firstDate: Date = new Date();
+	// 	const secondDate: Date = new Date(entry.timestamp);
+	// 	const daysSingle = 24 * 60 * 60 * 1000;
+	// 	const daysDiff = Math.round(
+	// 		Math.abs((firstDate.getTime() - secondDate.getTime()) / daysSingle)
+	// 	);
+	// 	return (daysAgo = daysDiff);
+	// };
 
-	// Days Counter
-	const daysAgoCounter = () => {
-		const firstDate: Date = new Date();
-		const secondDate: Date = new Date(entry.timestamp);
-		const daysSingle = 24 * 60 * 60 * 1000;
-		const daysDiff = Math.round(
-			Math.abs((firstDate.getTime() - secondDate.getTime()) / daysSingle)
-		);
-		return (daysAgo = daysDiff);
-	};
+	// // Trigger Days Counter
+	// onMount(() => {
+	// 	daysAgoCounter();
+	// });
 
-	// Trigger Days Counter
-	onMount(() => {
-		daysAgoCounter();
-	});
+	// Vote
+	const voteup = async() => {
+		if (entry.rating) {
+			entry.rating++;
+			// entry.rating = true;
+		}
+
+		// ({ entry } = await (entry.rating
+		// 	? api.post(`entrys/${entry.slug}/favorite`, null, user && user.token)
+		// 	: api.del(`entrys/${entry.slug}/favorite`, user && user.token)));
+	}
 </script>
-
-<!-- DEMO -->
-<!-- <article>
-	<ul style="border: 1px solid blue; display: flex; flex-direction: column; padding: 20px;">
-		<li>{entry.id}</li>
-		<li>{entry.timestamp}</li>
-		<li>{@html entry.author}</li>
-		<img src="https://joeschmoe.io/api/v1/{entry.avatar}" alt="{entry.avatar}" height="50" width="50"/>
-		<li>{@html entry.location.country}, {@html entry.location.city}</li>
-		<li>{entry.language}</li>
-		<li>{entry.text}</li>
-		<li>{entry.rating}</li>
-	</ul>
-</article> -->
 
 <!-- HTML -->
 {#if entry}
 	<article id="{entry.id}">
-		<figure>
-			<img src="https://joeschmoe.io/api/v1/{entry.avatar}" alt="avatar-{entry.avatar}" loading="lazy" width="60" height="60"/>
-			<figcaption>
-				<dl>
-					<dt>{@html entry.author}</dt>
-					<dd><time datetime="{entry.timestamp}">{daysAgo} days ago</time></dd>
-				</dl>
-			</figcaption>
-		</figure>
-		<p>{entry.text}</p>
-		<button type="button">
-			<svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M14 14H2M10 10H2M6 6H2M18 18H2M19 14V4m0 0l3 3m-3-3l-3 3" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+		<!-- <img src="https://api.multiavatar.com/{entry.avatar}.svg" alt="avatar-{entry.avatar}" loading="lazy" width="60" height="60"/> -->
+		<dl>
+			<dt>{entry.title}</dt>
+			<dd>{entry.text}</dd>
+			<!-- <dd><time datetime="{entry.timestamp}">{daysAgo} {daysHolder}</time></dd> -->
+		</dl>
+		<button type="button" on:click|once={voteup}>
+			<svg width="20" height="20"><use xlink:href="sprite.svg#like" href="sprite.svg#like"></use></svg>
 			{entry.rating}
 		</button>
 	</article>

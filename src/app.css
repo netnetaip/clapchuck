@@ -2,11 +2,11 @@
 :root {
 	--rad100: calc(100 * var(--point));
 	--rad50: .6rem;
-	--color-black: #000;
-	--color-dark: #808080;
+	--color-prime: #000;
+	--color-seco: #AAA;
 	--color-grey: #DADADA;
-	--color-ghost: #F6F6F6;
-	--color-blue: #0022E0;
+	--color-ghost: #F0F0F0;
+	--color-back: #FFF;
 	--point: 2px;
 }
 
@@ -32,6 +32,7 @@
 html, body {
 	max-width: 100%;
 	min-width: 100%;
+	background-color: var(--color-back);
 }
 
 main {
@@ -44,7 +45,7 @@ main, header {
 }
 
 /* Font Settings */
-h1, h2, h3, h4, a, button, p, small, label, dt, dd {
+h1, h2, h3, h4, a, button, p, small, label, dt, dd, figcaption {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -54,18 +55,18 @@ h1, h2, h3, h4, a, button, p, small, label, dt, dd {
 	text-decoration: none;
 }
 
-h1, h2, h4, a, label, dt, button {
-	color: var(--color-black);
+h1, h2, h4, a, label, dt, button, figcaption {
+	color: var(--color-prime);
 	font-family: "wals-med", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
 }
 
-h3, dd {
-	color: var(--color-dark);
+h3, time {
+	color: var(--color-seco);
 	font-family: "wals-reg", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
 }
 
-p, li, small {
-	color: var(--color-black);
+p, dd, li, small {
+	color: var(--color-prime);
 	font-family: "wals-reg", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
 }
 
@@ -74,25 +75,25 @@ h1 {
 	font-size: clamp(1.75rem, 1.75rem + 0vw, 1.75rem);
 }
 
-h2, h3, p, a {
+dt {
 	font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
 }
 
-button, dt, dd, label {
+h2, h3, p, a, dd, button {
+	font-size: clamp(0.95rem, 0.93rem + 0.08vw, 1rem);
+}
+
+label, small, time {
 	font-size: clamp(0.875rem, 0.825rem + 0.2vw, 1rem);
 }
 
-small {
-	font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
-}
-
 /* Flexbox */
-body, header, menu, nav, a, main, div, article, section, progress, form, label, input, details, button, figure {
+body, header, menu, nav, a, main, div, article, section, dl, progress, form, label, input, details, button, figure {
 	display: flex;
 }
 
 /* Direction */
-body, main, section, article, nav {
+body, main, section, dl {
 	flex-direction: column;
 }
 
@@ -100,6 +101,12 @@ body, main, section, article, nav {
 article, section {
 	align-items: stretch;
 	align-content: stretch;
+}
+
+/* Align Stretch */
+article {
+	align-items: flex-start;
+	align-content: flex-start;
 }
 
 /* Align Center */
@@ -115,13 +122,13 @@ body {
 }
 
 /* Justify Center */
-nav {
+nav, section {
 	justify-items: center;
 	justify-content: center;
 }
 
 /* Justify Between */
-header, form, article {
+header, form, dl {
 	justify-items: space-between;
 	justify-content: space-between;
 }
@@ -140,41 +147,37 @@ progress {
 	background-color: transparent;
 }
 ::-webkit-progress-value {
-	background-color: black;
+	background-color: var(--color-prime);
 	transition: all .2s ease-in;
-}
-
-/* SVGs */
-svg {
-	stroke-width: 1.8;
 }
 
 /* Header */
 header {
-	min-height: calc(30 * var(--point));
-	max-height: calc(30 * var(--point));
+	min-height: calc(36 * var(--point));
+	max-height: calc(36 * var(--point));
 	height: 100%;
 	padding: 0 calc(14 * var(--point));
-	background-color: white;
+	background-color: var(--color-back);
 	position: sticky;
 	top: 0;
 	z-index: 100;
 }
 
-nav {
-	position: fixed;
-	bottom: 0;
-	min-width: 100%;
-	max-width: 100%;
-	width: 100%;
-	gap: calc(12 * var(--point));
-	padding: calc(14 * var(--point));
-	background-color: powderblue;
-	border-radius: calc(2 * var(--rad50)) calc(2 * var(--rad50)) 0 0; 
+header > figure {
+	text-transform: capitalize;
+	gap: calc(4 * var(--point));
 }
 
-nav > a {
-	border-bottom: var(--point) solid transparent;
+header > figure > svg {
+	color: var(--color-prime);
+}
+
+nav {
+	gap: calc(10 * var(--point));
+}
+
+nav > a{
+	padding: calc(3 * var(--point)) 0;
 }
 
 /* Backdrop Filter */
@@ -207,7 +210,7 @@ fieldset {
 }
 label {
 	max-height: calc(40 * var(--point));
-	color: var(--color-dark);
+	color: var(--color-seco);
 	padding: calc(4 * var(--point)) calc(6 * var(--point));
 	border-radius: var(--rad50);
 	position: relative;
@@ -224,7 +227,7 @@ label > svg {
 	max-width: calc(8 * var(--point));
 	width: 100%;
 	margin-right: calc(4 * var(--point));
-	stroke: var(--color-dark);
+	stroke: var(--color-seco);
 }
 input[type=radio] {
 	-webkit-appearance: none;
@@ -234,11 +237,11 @@ input[type=radio] {
 }
 
 input[type=radio]:checked + label {
-	color: black;
+	color: var(--color-prime);
 }
 
 input[type=radio]:checked + label > svg {
-	stroke: black;
+	stroke: var(--color-prime);
 }
 
 input[type=radio]:checked + label::after {
@@ -246,7 +249,7 @@ input[type=radio]:checked + label::after {
 	display: block;
 	height: var(--point);
 	width: calc(100% - 12 * var(--point));
-	background-color: var(--color-black);
+	background-color: var(--color-prime);
 	position: absolute;
 	bottom: calc(var(--point) * -5 - 1px);
 	left: 0;
@@ -264,7 +267,7 @@ button {
 main > section {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(max(30%, min(calc(150 * var(--point)), 100%)), 1fr));
-	padding: calc(12 * var(--point)) 0;
+	padding: calc(8 * var(--point)) 0;
 	overflow: auto;
 	max-width: 100%;
 	width: 100%;
@@ -272,70 +275,67 @@ main > section {
 
 section > h1 {
 	padding: 0 calc(14 * var(--point));
+	width: 100%;
 }
 
 section > button {
-	max-width: 100%;
-	width: 100%;
-	height: calc(30 * var(--point));
-	padding: calc(6 * var(--point));
+	max-width: calc(100% - (28 * var(--point)));
+	width: calc(100% - (28 * var(--point)));
+	padding: calc(8 * var(--point));
 	justify-content: center;
 	border-radius: var(--rad50);
-	background-color: var(--color-ghost);
-}
-
-section > nav > a:hover {
-	background-color: var(--color-grey);
+	background-color: var(--color-prime);
+	color: white;
 }
 
 main > section > article {
-	padding: calc(12 * var(--point)) calc(14 * var(--point));
+	padding: calc(10 * var(--point)) calc(14 * var(--point));
 	min-width: 100%;
 	max-width: 100%;
 	width: 100%;
-	gap: calc(6 * var(--point));
-	border-bottom: 1px solid var(--color-grey);
+	flex-direction: column;
 }
 
-article > figure {
+article, article > dl {
 	gap: calc(6 * var(--point));
-	min-width: 100%;
 	max-width: 100%;
 	width: 100%;
 }
 
-article > figure > img {
-	min-width: calc(20 * var(--point));
-	max-width: calc(20 * var(--point));
-	width: 100%;
-	min-height: calc(20 * var(--point));
-	max-height: calc(20 * var(--point));
-	height: 100%;
-	border-radius: var(--rad50);
-	background-color: var(--color-grey);
-}
-
-article > figure > figcaption > dl {
-	max-width: 100%;
-	width: 100%;
-}
-
-article > figure > figcaption > dl > dd {
+article > dl > dd {
 	display: -webkit-box;
 	-webkit-line-clamp: 6;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 }
 
-article > button > svg {
-	min-width: calc(11 * var(--point));
-	max-width: calc(11 * var(--point));
+article > button {
+	/* max-width: calc(100% - (28 * var(--point))); */
+	/* padding: calc(4 * var(--point)) calc(8 * var(--point)); */
+}
+
+main > section > article:not(:last-of-type) {
+	border-bottom: 1px solid var(--color-grey);
+}
+
+article > figure {
+	gap: calc(4 * var(--point));
+	min-width: 100%;
+	max-width: 100%;
 	width: 100%;
-	min-height: calc(11 * var(--point));
-	max-height: calc(11 * var(--point));
+}
+
+article img {
+	min-width: calc(40 * var(--point));
+	max-width: calc(40 * var(--point));
+	width: 100%;
+	min-height: calc(40 * var(--point));
+	max-height: calc(40 * var(--point));
 	height: 100%;
-	margin-right: calc(4 * var(--point));
-	/* background-color: aqua; */
+}
+
+article > button > svg {
+	margin-right: calc(3 * var(--point));
 }
 
 /* Media Rules */
@@ -346,4 +346,7 @@ article > button > svg {
 }
 
 @media (min-width: 600px) {
+	article > button:hover {
+		cursor: pointer;
+	}
 }

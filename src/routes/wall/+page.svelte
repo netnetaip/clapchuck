@@ -1,15 +1,18 @@
 <script lang="ts">	
 	// Imports
 	import Article from "$lib/article/Article.svelte";
-	import type { PageData } from '../../../.svelte-kit/types/src/routes/board/$types';
+	import type { PageData } from '../../../.svelte-kit/types/src/routes/wall/$types';
 
 	// Exports
 	export let data: PageData;
 
 	// Lets
 	let dataMoreEntries: any = [];
-	let page = 1;
-	let limit = 40;
+	let page: number = 1;
+	let limit: number = 40;
+
+	// Consts
+	const title = "Wall of sins";
 
 	// Fetch More Data
 	const fetchMore = async () => {
@@ -22,27 +25,17 @@
 
 	// Spread Data Entries
 	$: data.entries = [...data.entries, ...dataMoreEntries];
-
-	// DEVELOPMENT
-	$: console.log("Entries Data — ", data);
 </script>
 
 <!-- Head -->
 <svelte:head>
-	<title>Board</title>
+	<title>{title}</title>
 	<meta name="description" content="" />
 </svelte:head>
 
-<!-- DEVELOPMENT -->
-<!-- <div style="background-color: pink; position: fixed; bottom: 20px; z-index: 999; padding: 10px;">
-	<p>Entries int - {data.entries.length}</p>
-	<p>Entries add - {dataMoreEntries.length}</p>
-	<p>Entries addition all loaded? - {dataMoreEntries.length === 0 || dataMoreEntries.length >= 40 ? 'no' : 'yes'}</p>
-</div> -->
-
 <!-- Cards -->
 <section>
-	<h1>Collective<br />forgiveness</h1>
+	<h1>{title}</h1>
 	{#if data.entries.length === 0}
 		<pre>Nothing here yet</pre>
 	{:else}
@@ -51,6 +44,6 @@
 		{/each}
 	{/if}
 	{#if dataMoreEntries.length === 0 || dataMoreEntries.length >= 40}
-		<button on:click={() => {page++; fetchMore()}}>Load more...</button>
+		<button on:click={() => {page++; fetchMore()}}>Load more</button>
 	{/if}
 </section>
